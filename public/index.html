@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mall Analytics Dashboard</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@6.3.3/dist/framer-motion.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 p-4">
+            <h1 class="text-2xl font-bold mb-8">Filters</h1>
+            <div class="space-y-6">
+                <div>
+                    <label for="time-range" class="block text-sm font-medium">Time Range</label>
+                    <select id="time-range" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1">
+                        <option>Last 24 hours</option>
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="product-category" class="block text-sm font-medium">Product Category</label>
+                    <select id="product-category" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1">
+                        <option>All</option>
+                        <option>Electronics</option>
+                        <option>Clothing</option>
+                        <option>Food</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="floor-zone" class="block text-sm font-medium">Floor or Zone</label>
+                    <select id="floor-zone" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1">
+                        <option>All</option>
+                        <option>Floor 1</option>
+                        <option>Floor 2</option>
+                        <option>Food Court</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <!-- Header -->
+            <header class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold">Mall of Analytics</h1>
+                    <p class="text-gray-400">Real-time status: <span class="text-green-400">Online</span></p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <input type="text" placeholder="Search products or zones..." class="bg-gray-800 border-gray-700 rounded-md px-4 py-2">
+                    <button class="bg-gray-800 p-2 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 16v-2m8-6h2M4 12H2m15.364 6.364l1.414-1.414M4.222 4.222l1.414 1.414m12.728 0l-1.414 1.414M5.636 18.364l-1.414-1.414" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-gray-400">Total People Detected</h3>
+                    <p class="text-4xl font-bold">1,234</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-gray-400">Current People in Mall</h3>
+                    <p class="text-4xl font-bold">456</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-gray-400">Average Dwell Time</h3>
+                    <p class="text-4xl font-bold">23m</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-gray-400">Hot Zones</h3>
+                    <p class="text-4xl font-bold">3</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Heatmap -->
+                <div class="lg:col-span-2 bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Activity Heatmap</h3>
+                    <div class="relative">
+                        <img src="https://i.imgur.com/J82eJ3G.png" alt="Mall Floor Plan" class="rounded-lg">
+                        <div class="absolute top-0 left-0 w-full h-full bg-red-500 opacity-20 rounded-lg"></div>
+                         <div class="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-yellow-500 opacity-30 rounded-lg"></div>
+                    </div>
+                </div>
+
+                <!-- Top Products -->
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Top Products</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <img src="https://i.imgur.com/6y3XJjC.png" alt="Product" class="w-16 h-16 rounded-md mr-4">
+                            <div>
+                                <p class="font-bold">Smartphone X</p>
+                                <p class="text-gray-400">Interactions: 123</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://i.imgur.com/QJ0Xh3x.png" alt="Product" class="w-16 h-16 rounded-md mr-4">
+                            <div>
+                                <p class="font-bold">Wireless Headphones</p>
+                                <p class="text-gray-400">Interactions: 98</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://i.imgur.com/vO35lR4.png" alt="Product" class="w-16 h-16 rounded-md mr-4">
+                            <div>
+                                <p class="font-bold">Smartwatch</p>
+                                <p class="text-gray-400">Interactions: 76</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                <!-- Zone Activity -->
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Zone Activity</h3>
+                    <canvas id="zone-activity-chart"></canvas>
+                </div>
+
+                <!-- Camera Status -->
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Camera Status</h3>
+                    <div class="flex items-center justify-center h-full">
+                        <div class="text-center">
+                            <p class="text-6xl font-bold">16/16</p>
+                            <p class="text-gray-400">Active Cameras</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const zoneActivityCtx = document.getElementById('zone-activity-chart').getContext('2d');
+        const zoneActivityChart = new Chart(zoneActivityCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Zone A', 'Zone B', 'Zone C', 'Food Court'],
+                datasets: [{
+                    label: 'Activity',
+                    data: [300, 150, 200, 400],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'People per Zone'
+                    }
+                }
+            },
+        });
+    </script>
+</body>
+</html>

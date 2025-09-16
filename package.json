@@ -1,0 +1,21 @@
+{
+  "name": "analytics-dashboard",
+  "version": "1.0.0",
+  "description": "A single-page web application frontend for mall analytics.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss build -i src/style.css -o public/style.css",
+    "watch:css": "tailwindcss build -i src/style.css -o public/style.css --watch"
+  },
+  "keywords": [
+    "tailwind",
+    "dashboard",
+    "analytics"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "framer-motion": "^6.3.3",
+    "tailwindcss": "^3.0.24"
+  }
+}

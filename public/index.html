@@ -8,23 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/framer-motion@6.3.3/dist/framer-motion.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-gray-900 text-gray-100 font-sans">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-gray-800 p-4">
-            <h1 class="text-2xl font-bold mb-8">Filters</h1>
+        <aside class="w-64 bg-gray-800 p-6 hidden sm:block">
+            <h1 class="text-2xl font-bold mb-8 text-white">Filters</h1>
             <div class="space-y-6">
                 <div>
-                    <label for="time-range" class="block text-sm font-medium">Time Range</label>
-                    <select id="time-range" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1">
+                    <label for="time-range" class="block text-sm font-medium text-gray-400">Time Range</label>
+                    <select id="time-range" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1 text-white">
                         <option>Last 24 hours</option>
                         <option>Last 7 days</option>
                         <option>Last 30 days</option>
                     </select>
                 </div>
                 <div>
-                    <label for="product-category" class="block text-sm font-medium">Product Category</label>
-                    <select id="product-category" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1">
+                    <label for="product-category" class="block text-sm font-medium text-gray-400">Product Category</label>
+                    <select id="product-category" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1 text-white">
                         <option>All</option>
                         <option>Electronics</option>
                         <option>Clothing</option>
@@ -32,8 +32,8 @@
                     </select>
                 </div>
                 <div>
-                    <label for="floor-zone" class="block text-sm font-medium">Floor or Zone</label>
-                    <select id="floor-zone" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1">
+                    <label for="floor-zone" class="block text-sm font-medium text-gray-400">Floor or Zone</label>
+                    <select id="floor-zone" class="w-full bg-gray-700 border-gray-600 rounded-md mt-1 text-white">
                         <option>All</option>
                         <option>Floor 1</option>
                         <option>Floor 2</option>
@@ -44,107 +44,113 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-6 sm:p-8 overflow-y-auto">
             <!-- Header -->
             <header class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold">Mall of Analytics</h1>
-                    <p class="text-gray-400">Real-time status: <span class="text-green-400">Online</span></p>
+                    <h1 class="text-3xl font-bold text-white">Mall Analytics</h1>
+                    <p class="text-gray-400">Real-time status: <span class="text-green-400 font-semibold">● Online</span></p>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <input type="text" placeholder="Search products or zones..." class="bg-gray-800 border-gray-700 rounded-md px-4 py-2">
-                    <button class="bg-gray-800 p-2 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 16v-2m8-6h2M4 12H2m15.364 6.364l1.414-1.414M4.222 4.222l1.414 1.414m12.728 0l-1.414 1.414M5.636 18.364l-1.414-1.414" />
-                        </svg>
-                    </button>
+                    <input type="text" placeholder="Search..." class="bg-gray-800 border-gray-700 rounded-md px-4 py-2 hidden md:block">
                 </div>
             </header>
 
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-gray-400">Total People Detected</h3>
-                    <p class="text-4xl font-bold">1,234</p>
+                <div class="bg-gray-800 p-6 rounded-lg flex items-center space-x-4">
+                    <div class="bg-blue-500/20 p-3 rounded-full">
+                        <svg class="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-gray-400 text-sm">Total People</h3>
+                        <p id="total-people" class="text-2xl font-bold text-white">1234</p>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-gray-400">Current People in Mall</h3>
-                    <p class="text-4xl font-bold">456</p>
+                <div class="bg-gray-800 p-6 rounded-lg flex items-center space-x-4">
+                    <div class="bg-green-500/20 p-3 rounded-full">
+                        <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-gray-400 text-sm">Avg. Dwell Time</h3>
+                        <p id="dwell-time" class="text-2xl font-bold text-white">23m</p>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-gray-400">Average Dwell Time</h3>
-                    <p class="text-4xl font-bold">23m</p>
+                <div class="bg-gray-800 p-6 rounded-lg flex items-center space-x-4">
+                    <div class="bg-yellow-500/20 p-3 rounded-full">
+                        <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-gray-400 text-sm">Hot Zones</h3>
+                        <p id="hot-zones" class="text-2xl font-bold text-white">3</p>
+                    </div>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-gray-400">Hot Zones</h3>
-                    <p class="text-4xl font-bold">3</p>
+                <div class="bg-gray-800 p-6 rounded-lg flex items-center space-x-4">
+                    <div class="bg-red-500/20 p-3 rounded-full">
+                        <svg class="h-6 w-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-gray-400 text-sm">Cameras Online</h3>
+                        <p class="text-2xl font-bold text-white">16 / 16</p>
+                    </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Heatmap -->
                 <div class="lg:col-span-2 bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-4">Activity Heatmap</h3>
-                    <div class="relative w-full aspect-video rounded-lg bg-gray-700 p-4">
-                        <svg viewBox="0 0 200 100" class="w-full h-full">
-                            <rect x="5" y="5" width="50" height="30" class="stroke-gray-500 fill-gray-900" />
-                            <text x="30" y="23" font-size="8" class="fill-gray-400 text-center">Zone A</text>
-
-                            <rect x="65" y="5" width="80" height="50" class="stroke-gray-500 fill-gray-900" />
-                            <text x="105" y="33" font-size="8" class="fill-gray-400 text-center">Zone B</text>
-
-                            <rect x="155" y="5" width="40" height="30" class="stroke-gray-500 fill-gray-900" />
-                            <text x="175" y="23" font-size="8" class="fill-gray-400 text-center">Zone C</text>
-
-                            <rect x="5" y="45" width="50" height="50" class="stroke-gray-500 fill-gray-900" />
-                            <text x="30" y="70" font-size="8" class="fill-gray-400 text-center">Food Court</text>
-
-                            <rect x="65" y="65" width="130" height="30" class="stroke-gray-500 fill-gray-900" />
-                            <text x="130" y="83" font-size="8" class="fill-gray-400 text-center">Main Hall</text>
+                    <h3 class="text-xl font-bold mb-4 text-white">Activity Heatmap</h3>
+                    <div class="relative w-full aspect-video rounded-lg bg-gray-900/50 p-4">
+                        <svg viewBox="0 0 200 100" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                            <!-- Base Floor Plan -->
+                            <g id="floor-plan" class="stroke-gray-600 stroke-1 fill-gray-700/30">
+                                <rect x="5" y="5" width="50" height="30" /><text x="30" y="23" font-size="6" class="fill-gray-400" text-anchor="middle">Zone A</text>
+                                <rect x="65" y="5" width="80" height="50" /><text x="105" y="33" font-size="6" class="fill-gray-400" text-anchor="middle">Zone B</text>
+                                <rect x="155" y="5" width="40" height="30" /><text x="175" y="23" font-size="6" class="fill-gray-400" text-anchor="middle">Zone C</text>
+                                <rect x="5" y="45" width="50" height="50" /><text x="30" y="70" font-size="6" class="fill-gray-400" text-anchor="middle">Food Court</text>
+                                <rect x="65" y="65" width="130" height="30" /><text x="130" y="83" font-size="6" class="fill-gray-400" text-anchor="middle">Main Hall</text>
+                            </g>
+                            <!-- Heatmap Overlay -->
+                            <g id="heatmap-layer" class="opacity-70">
+                                <rect x="5" y="45" width="50" height="50" class="fill-red-500" />
+                                <rect x="65" y="5" width="80" height="50" class="fill-yellow-500" />
+                                <rect x="5" y="5" width="50" height="30" class="fill-yellow-500/70" />
+                                <rect x="155" y="5" width="40" height="30" class="fill-blue-500/80" />
+                                <rect x="65" y="65" width="130" height="30" class="fill-blue-500/50" />
+                            </g>
                         </svg>
-                        <div class="absolute top-0 left-0 w-full h-full mix-blend-screen">
-                            <div class="absolute top-[10%] left-[10%] w-[20%] h-[25%] bg-red-600/80 rounded-full blur-2xl"></div>
-                            <div class="absolute top-[50%] left-[50%] w-[30%] h-[40%] bg-yellow-500/70 rounded-full blur-3xl"></div>
-                            <div class="absolute top-[25%] left-[70%] w-[15%] h-[20%] bg-green-500/60 rounded-full blur-2xl"></div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Top Products -->
                 <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-4">Top Products</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">Top Products</h3>
                     <div class="space-y-4">
                         <div class="flex items-center">
-                            <div class="w-16 h-16 rounded-md mr-4 bg-gray-700 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                </svg>
+                            <div class="w-12 h-12 rounded-md mr-4 bg-gray-700 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                             </div>
                             <div>
-                                <p class="font-bold">Smartphone X</p>
-                                <p class="text-gray-400">Interactions: 123</p>
+                                <p class="font-bold text-white">Smartphone X</p>
+                                <p class="text-gray-400 text-sm">Interactions: 123</p>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="w-16 h-16 rounded-md mr-4 bg-gray-700 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 8v5a4 4 0 01-4 4H8a4 4 0 01-4-4V8a2 2 0 012-2h12a2 2 0 012 2zM7 8V6a4 4 0 118 0v2" />
-                                </svg>
+                            <div class="w-12 h-12 rounded-md mr-4 bg-gray-700 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 8v5a4 4 0 01-4 4H8a4 4 0 01-4-4V8a2 2 0 012-2h12a2 2 0 012 2zM7 8V6a4 4 0 118 0v2" /></svg>
                             </div>
                             <div>
-                                <p class="font-bold">Wireless Headphones</p>
-                                <p class="text-gray-400">Interactions: 98</p>
+                                <p class="font-bold text-white">Wireless Headphones</p>
+                                <p class="text-gray-400 text-sm">Interactions: 98</p>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="w-16 h-16 rounded-md mr-4 bg-gray-700 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                            <div class="w-12 h-12 rounded-md mr-4 bg-gray-700 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             </div>
                             <div>
-                                <p class="font-bold">Smartwatch</p>
-                                <p class="text-gray-400">Interactions: 76</p>
+                                <p class="font-bold text-white">Smartwatch</p>
+                                <p class="text-gray-400 text-sm">Interactions: 76</p>
                             </div>
                         </div>
                     </div>
@@ -154,18 +160,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 <!-- Zone Activity -->
                 <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-4">Zone Activity</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">Zone Activity</h3>
                     <canvas id="zone-activity-chart"></canvas>
                 </div>
 
-                <!-- Camera Status -->
-                <div class="bg-gray-800 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-4">Camera Status</h3>
-                    <div class="flex items-center justify-center h-full">
-                        <div class="text-center">
-                            <p class="text-6xl font-bold">16/16</p>
-                            <p class="text-gray-400">Active Cameras</p>
-                        </div>
+                <!-- Placeholder for another chart or table -->
+                <div class="bg-gray-800 p-6 rounded-lg lg:col-span-2">
+                    <h3 class="text-xl font-bold mb-4 text-white">Future Data Section</h3>
+                     <div class="flex items-center justify-center h-full text-gray-500">
+                        <p>More visualizations coming soon.</p>
                     </div>
                 </div>
             </div>
@@ -173,41 +176,54 @@
     </div>
 
     <script>
+        // Doughnut Chart
         const zoneActivityCtx = document.getElementById('zone-activity-chart').getContext('2d');
         const zoneActivityChart = new Chart(zoneActivityCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Zone A', 'Zone B', 'Zone C', 'Food Court'],
+                labels: ['Zone A', 'Zone B', 'Food Court', 'Main Hall', 'Zone C'],
                 datasets: [{
                     label: 'Activity',
-                    data: [300, 150, 200, 400],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                    ],
-                    borderWidth: 1
+                    data: [220, 300, 400, 150, 80],
+                    backgroundColor: ['#FBBF24', '#F87171', '#60A5FA', '#34D399', '#A78BFA'],
+                    borderColor: '#1F2937',
+                    borderWidth: 4,
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'People per Zone'
+                        position: 'bottom',
+                        labels: {
+                            color: '#9CA3AF',
+                            font: { size: 14 }
+                        }
                     }
                 }
             },
+        });
+
+        // Animated Counters
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            animateValue(document.getElementById('total-people'), 0, 1234, 1500);
+            animateValue(document.getElementById('hot-zones'), 0, 3, 1500);
+            // For dwell time, we just set it as it's not a simple number
+            document.getElementById('dwell-time').innerHTML = '23m';
         });
     </script>
 </body>

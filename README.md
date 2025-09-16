@@ -1,7 +1,6 @@
-
 # Mall Analytics Dashboard
 
-A single-page web application frontend built with Tailwind CSS to visualize people movement, product interactions, and activity heatmaps in a shopping mall. This project is designed to be a realistic prototype of a modern analytics dashboard.
+A single-page web application frontend built with Tailwind CSS to visualize people movement, product interactions, and activity heatmaps in a shopping mall. This project is designed to be a realistic and interactive prototype of a modern analytics dashboard.
 
 ---
 
@@ -12,80 +11,53 @@ The live dashboard is automatically deployed via GitHub Actions and can be viewe
 
 ---
 
+## Features
+
+- **Modern Dark UI:** A visually appealing and professional dark theme with colorful accents.
+- **Interactive Heatmap:** A pseudo-3D SVG floor plan with interactive tooltips showing detailed stats for each zone.
+- **Animated Stats:** Key metrics animate on load, giving the dashboard a live feel.
+- **Vibrant Charts:** A clean and colorful donut chart visualizes activity across different zones.
+- **Responsive Design:** The layout is fully responsive and optimized for desktop and tablet use.
+- **Automated Deployment:** The project is automatically built and deployed to GitHub Pages using a GitHub Actions workflow.
+
 ## Dashboard Sections Explained
 
-This dashboard provides a real-time overview of mall activity through several key sections:
-
-### 1. Real-time Stats
-These are the four main cards at the top providing an immediate, icon-driven snapshot of the mall's status. The numbers animate on load to give a feeling of a live-updating dashboard.
-- **Total People:** A cumulative count of all unique individuals detected over a period.
-- **Avg. Dwell Time:** The average amount of time a person spends in the mall.
-- **Hot Zones:** The number of zones currently experiencing high levels of activity.
-- **Cameras Online:** The operational status of the camera network.
-
-### 2. Activity Heatmap
-This section displays a clean, professional SVG floor plan. The heatmap is rendered as colored, semi-transparent zones directly on the map, which is a more realistic approach for data visualization than a simple image overlay.
-- **Blue:** Low activity.
-- **Yellow:** Medium activity.
-- **Red:** High activity (hotspot).
-
-### 3. Top Products
-This card lists the products that are receiving the most interactions. Product images have been replaced with clean SVG icons for a more uniform and modern UI.
-
-### 4. Zone Activity
-This donut chart breaks down the distribution of people across different defined zones in the mall. The chart is interactive and has an updated, more vibrant color scheme.
+- **Real-time Stats:** Four main cards with colorful icons and top borders provide a snapshot of key metrics. The numbers animate on load.
+- **Activity Heatmap:** An interactive SVG floor plan where hovering over a zone reveals a tooltip with specific data like people count and average dwell time.
+- **Top Products:** A list of top-selling items with clean, uniform icons and a colorful top border.
+- **Zone Activity:** A donut chart that visualizes the distribution of people across the mall's zones.
 
 --- 
 
 ## How to Add Your Own Data (Input)
 
-Currently, this is a frontend-only prototype. All data is hard-coded as placeholders inside the `public/index.html` file. To add your own data, you need to edit this file.
+This is a frontend-only prototype. All data is hard-coded inside a `<script>` tag at the bottom of the `public/index.html` file. To add your own data, you only need to edit the `heatmapData` object.
 
-### Editing Real-time Stats & Animated Counters
-Find the `<script>` tag at the bottom of the page. The animated counters are controlled here. Change the end values (e.g., `1234` or `3`) to update the display.
+### Editing All Dashboard Data
+
+All the data for the heatmap, tooltips, and charts is controlled by a single JavaScript object. Find the `<script>` tag and edit the `heatmapData` object:
+
 ```javascript
-document.addEventListener('DOMContentLoaded', () => {
-    animateValue(document.getElementById('total-people'), 0, 1234, 1500); // EDIT 1234
-    animateValue(document.getElementById('hot-zones'), 0, 3, 1500); // EDIT 3
-    document.getElementById('dwell-time').innerHTML = '23m'; // EDIT '23m'
-});
+// --- Data Store ---
+const heatmapData = {
+    'zone-a': { name: 'Zone A', people: 220, dwell: '15m' },
+    'zone-b': { name: 'Zone B', people: 300, dwell: '18m' },
+    'zone-c': { name: 'Zone C', people: 80, dwell: '7m' },
+    'food-court': { name: 'Food Court', people: 400, dwell: '25m' },
+    'main-hall': { name: 'Main Hall', people: 150, dwell: '12m' },
+};
 ```
+- **To change tooltip data:** Edit the `people` and `dwell` values for each zone.
+- **To change the donut chart:** The chart automatically uses the `name` and `people` values from this object.
+- **To change the heatmap colors:** The colors are hard-coded in the SVG, but this data object is what *should* drive them in a real application.
 
-### Editing the Heatmap
-Inside the `<!-- Heatmap -->` section, the heatmap is an SVG layer. You can change the `fill` color of each `<rect>` inside the `<g id="heatmap-layer">` to reflect your data. For example, change `fill-red-500` to `fill-blue-500`.
-```html
-<g id="heatmap-layer" class="opacity-70">
-    <rect x="5" y="45" width="50" height="50" class="fill-red-500" /> <!-- Hot Zone -->
-    <rect x="65" y="5" width="80" height="50" class="fill-yellow-500" /> <!-- Medium Zone -->
-    <rect x="65" y="65" width="130" height="30" class="fill-blue-500/50" /> <!-- Low Zone -->
-</g>
-```
-
-### Editing Zone Activity Chart
-In the `<script>` tag at the bottom, edit the `labels` and `data` arrays to match your zones and people counts:
-```javascript
-const zoneActivityChart = new Chart(zoneActivityCtx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Zone A', 'Zone B', 'Food Court'], // EDIT ZONE NAMES HERE
-        datasets: [{
-            label: 'Activity',
-            data: [220, 300, 400], // EDIT PEOPLE COUNTS HERE
-            // ...
-        }]
-    },
-    // ...
-});
-```
-
----
+--- 
 
 ## Technical Details
 
 - **Frontend:** HTML, Tailwind CSS
 - **Charts:** Chart.js
-- **Graphics:** Inline SVG for icons and floor plan.
-- **Animations:** Basic JavaScript for animated counters.
+- **Graphics & Interactivity:** Inline SVG and vanilla JavaScript for tooltips and animations.
 - **Deployment:** Automated via GitHub Actions to GitHub Pages.
 
 ### Local Development

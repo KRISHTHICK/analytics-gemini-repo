@@ -1,6 +1,6 @@
 # Mall Analytics Dashboard
 
-A single-page web application frontend built with Tailwind CSS to visualize people movement, product interactions, and activity heatmaps in a shopping mall. This project is designed to be a realistic and interactive prototype of a modern analytics dashboard.
+A single-page web application frontend built with Tailwind CSS to visualize people movement, product interactions, and activity heatmaps in a shopping mall. This project is a realistic and interactive prototype of a modern analytics dashboard.
 
 ---
 
@@ -13,43 +13,43 @@ The live dashboard is automatically deployed via GitHub Actions and can be viewe
 
 ## Features
 
-- **Modern Dark UI:** A visually appealing and professional dark theme with colorful accents.
-- **Interactive Heatmap:** A pseudo-3D SVG floor plan with interactive tooltips showing detailed stats for each zone.
+- **Tabbed Interface:** The UI is split into a main `Dashboard` and a `Floor Plan` view.
+- **Modern Dark UI:** A visually appealing and professional dark theme with colorful accents and card borders.
+- **Interactive Heatmap:** On the Floor Plan tab, a pseudo-3D SVG floor plan features interactive tooltips showing detailed stats for each zone.
+- **Simulated Upload UI:** Includes a UI mock-up for a feature to upload a 3D model of the floor plan.
+- **Upgraded Charts:** The Zone Activity data is now a bar chart showing both people count and average dwell time.
+- **Detailed Lists:** The Camera Status and Top Products sections are now detailed lists with categories and statuses.
 - **Animated Stats:** Key metrics animate on load, giving the dashboard a live feel.
-- **Vibrant Charts:** A clean and colorful donut chart visualizes activity across different zones.
 - **Responsive Design:** The layout is fully responsive and optimized for desktop and tablet use.
-- **Automated Deployment:** The project is automatically built and deployed to GitHub Pages using a GitHub Actions workflow.
 
-## Dashboard Sections Explained
+## How to Use
 
-- **Real-time Stats:** Four main cards with colorful icons and top borders provide a snapshot of key metrics. The numbers animate on load.
-- **Activity Heatmap:** An interactive SVG floor plan where hovering over a zone reveals a tooltip with specific data like people count and average dwell time.
-- **Top Products:** A list of top-selling items with clean, uniform icons and a colorful top border.
-- **Zone Activity:** A donut chart that visualizes the distribution of people across the mall's zones.
+Navigate between the **Dashboard** and **Floor Plan** tabs to see the different views. On the floor plan, hover your mouse over the colored zones to see detailed tooltips with live data.
 
 --- 
 
-## How to Add Your Own Data (Input)
+## How to Add Your Own Data
 
-This is a frontend-only prototype. All data is hard-coded inside a `<script>` tag at the bottom of the `public/index.html` file. To add your own data, you only need to edit the `heatmapData` object.
-
-### Editing All Dashboard Data
-
-All the data for the heatmap, tooltips, and charts is controlled by a single JavaScript object. Find the `<script>` tag and edit the `heatmapData` object:
+This is a frontend-only prototype. All data is hard-coded inside a single `<script>` tag at the bottom of the `public/index.html` file. To add your own data, you only need to edit the `dashboardData` object.
 
 ```javascript
 // --- Data Store ---
-const heatmapData = {
-    'zone-a': { name: 'Zone A', people: 220, dwell: '15m' },
-    'zone-b': { name: 'Zone B', people: 300, dwell: '18m' },
-    'zone-c': { name: 'Zone C', people: 80, dwell: '7m' },
-    'food-court': { name: 'Food Court', people: 400, dwell: '25m' },
-    'main-hall': { name: 'Main Hall', people: 150, dwell: '12m' },
+const dashboardData = {
+    stats: {
+        totalPeople: 1357,
+        currentPeople: 489,
+        avgDwellTime: '28m',
+        hotZones: 2,
+    },
+    zoneData: {
+        'zone-a': { name: 'Zone A', people: 220, dwell: '15m' },
+        'zone-b': { name: 'Zone B', people: 300, dwell: '18m' },
+        // ... more zones
+    }
 };
 ```
-- **To change tooltip data:** Edit the `people` and `dwell` values for each zone.
-- **To change the donut chart:** The chart automatically uses the `name` and `people` values from this object.
-- **To change the heatmap colors:** The colors are hard-coded in the SVG, but this data object is what *should* drive them in a real application.
+- **To change the main stat cards:** Edit the values in the `stats` object.
+- **To change heatmap, tooltips, and charts:** Edit the `name`, `people`, and `dwell` values for each zone in the `zoneData` object. The bar chart and tooltips will update automatically.
 
 --- 
 
@@ -57,34 +57,12 @@ const heatmapData = {
 
 - **Frontend:** HTML, Tailwind CSS
 - **Charts:** Chart.js
-- **Graphics & Interactivity:** Inline SVG and vanilla JavaScript for tooltips and animations.
+- **Graphics & Interactivity:** Inline SVG and vanilla JavaScript for tabs, tooltips, and animations.
 - **Deployment:** Automated via GitHub Actions to GitHub Pages.
 
 ### Local Development
 
-To run this project on your local machine:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/KRISHTHICK/analytics-gemini-repo.git
-    cd analytics-gemini-repo
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Build and Watch CSS:**
-    To automatically rebuild the CSS when you make changes, run:
-    ```bash
-    npm run watch:css
-    ```
-
-4.  **Serve the Website:**
-    In a separate terminal, navigate to the `public/` directory and run a simple web server:
-    ```bash
-    cd public
-    python3 -m http.server 8080
-    ```
-    You can then view the dashboard at `http://localhost:8080`.
+1.  **Clone the repository.**
+2.  **Install dependencies:** `npm install`
+3.  **Build and Watch CSS:** `npm run watch:css`
+4.  **Serve the Website:** Navigate to the `public/` directory and run `python3 -m http.server 8080`.
